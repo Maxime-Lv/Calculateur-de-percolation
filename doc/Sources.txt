@@ -1,0 +1,20 @@
+-----Sources-----
+Sources utilisées: 
+-tresfacile.net
+-stackoverflow.com
+-univ-paris-diderot.fr
+-infoforall.fr
+-developpez.com
+-he-arc.github.io
+-carnets.info
+-digitalocean.com
+-pythoniste.fr
+-python.org
+-chat.openai.com
+
+Outils utilisées:
+-products.aspose.app
+-convertio.co
+-htmlcolorcodes.com
+
+Le code a été entièremenet écrit par l'équipe du "Calculateur de percolation" et n'exploite pas de codes existants

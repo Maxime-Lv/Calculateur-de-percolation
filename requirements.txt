@@ -1,0 +1,4 @@
+-----Requirements-----
+Prérequis:
+-L'IDE Spyder (support sur autre IDE non garantit)
+-Le fichier "logo.png" doit être dans le même ficher que "Calculateur de percolation"

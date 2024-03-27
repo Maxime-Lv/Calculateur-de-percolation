@@ -1,0 +1,8 @@
+-----Bibliotèques-----
+Bibliotèques utilisées:
+-tkinter
+-matplotlib.pyplot
+-PIL
+-random
+-matplotlib.colors
+-time
