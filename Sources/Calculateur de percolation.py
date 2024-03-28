@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import tkinter as tk
 import matplotlib.pyplot as plt
 from PIL import Image, ImageTk
@@ -27,27 +29,27 @@ titre.pack()            # Ajout du titre sur la fenêtre
 n = tk.Entry(window, width=24, bg='#b3fef7')       # Définition de l'entrée
 n.place(x=50, y=150)                               # Placement du champ de texte sur la fenêtre
 n.insert(0, "Longueur du tableau :")               # Ajout d'un texte dans le champ de texte pour indiquer à l'utilisateur ce qu'il faut rentrer
-n.configure(state='disabled')                      # Défifnir le champ de texte comme désactiver, pour que l'utilisateur ne puisse pas modifier le texte 
+n.configure(state='disabled')                      # Défifnir le champ de texte comme désactivé, pour que l'utilisateur ne puisse pas modifier le texte 
 
 n_focus_in = n.bind('<Button-1>', lambda x: focus_in(n))      # Cette ligne déclenche une fonction lorsque l'utilisateur clique dans l'entrée. Cette fonction enlevera le texte initial et autorise la saisie
-n_focus_out = n.bind('<FocusOut>', lambda x: focus_out(n, 'Longueur du tableau :'))        # Cette ligne déclenche une autre fonction lorsque l'entrée perd le focus. Cette fonction fait que si le champ et vide après avoir cliqué dessus, il y a un retour du texte initial
+n_focus_out = n.bind('<FocusOut>', lambda x: focus_out(n, 'Longueur du tableau :'))        # Cette ligne déclenche une autre fonction lorsque l'entrée perd le focus. Cette fonction fait que si le champ est vide après avoir cliqué dessus, il y a un retour du texte initial
 
 # Champ de texte probabilité apparition cases blanches
 p = tk.Entry(window, width=24, bg='#b3fef7')       # Définition de l'entrée
 p.place(x=50, y=185)                               # Placement du champ de texte sur la fenêtre
 p.insert(0, "Probabilité cases blanches :")        # Ajout d'un texte dans le champ de texte pour indiquer à l'utilisateur ce qu'il faut rentrer
-p.configure(state='disabled')                      # Défifnir le champ de texte comme désactiver, pour que l'utilisateur ne puisse pas modifier le texte 
+p.configure(state='disabled')                      # Défifnir le champ de texte comme désactivé, pour que l'utilisateur ne puisse pas modifier le texte 
 
 p_focus_in = p.bind('<Button-1>', lambda x: focus_in(p))      # Cette ligne déclenche une fonction lorsque l'utilisateur clique dans l'entrée. Cette fonction enlevera le texte initial et autorise la saisie
-p_focus_out = p.bind('<FocusOut>', lambda x: focus_out(p, 'Probabilité cases blanches :'))        # Cette ligne déclenche une autre fonction lorsque l'entrée perd le focus. Cette fonction fait que si le champ et vide après avoir cliqué dessus, il y a un retour du texte initial
+p_focus_out = p.bind('<FocusOut>', lambda x: focus_out(p, 'Probabilité cases blanches :'))        # Cette ligne déclenche une autre fonction lorsque l'entrée perd le focus. Cette fonction fait que si le champ est vide après avoir cliqué dessus, il y a un retour du texte initial
 
 
 # Création du canvas pour afficher l'image
-monCanvas = tk.Canvas(window, width=450, height=450, bg='white')          # Création du Canva, pour afficher les futus images de percolation
-monCanvas.place(x=320, y=150)                                             # Disposition du canva sur la fenêtre graphique
+monCanvas = tk.Canvas(window, width=450, height=450, bg='white')          # Création du canva, pour afficher les futus images de percolation
+monCanvas.place(x=320, y=150)                                             # Disposition du canvas sur la fenêtre graphique
 
 
-# Variable(s) golbale(s)
+# Variable golbale
 grille_fin = 0          # Variable globale qui contiendra une grille après sa génération. Elle sera utilisée pour afficher et percoler sur la même grille
 
 
@@ -71,11 +73,11 @@ def focus_out(entry, placeholder):
 def afficher_image(L: list):
     """Affiche l'image générée par la liste L sur le canvas."""
     fig, ax = plt.subplots(figsize=(7.5, 7.5))  # Définir la taille de la figure Matplotlib
-    ax.matshow(L, cmap=ListedColormap(['black', 'aqua', 'white']), vmin=0.0, vmax=1.0)   # Associe au valeurs d'une matrice une couleur définies par une échelle. "vmin" et "vmax" définissent respectivement les valeurs minimale et maximale des données affichées.
+    ax.matshow(L, cmap=ListedColormap(['black', 'aqua', 'white']), vmin=0.0, vmax=1.0)   # Associe au valeurs d'une matrice une couleur définie par une échelle. "vmin" et "vmax" définissent respectivement les valeurs minimale et maximale des données affichées.
     plt.close(fig)  # Fermer la figure pour éviter l'affichage dans la fenêtre
     photo = convertisseur(fig)    # Fait appel à la fonction convertisseur pour transformer un image Matplotlib en image compatible avec Tkinter
-    monCanvas.create_image(-45, -40, anchor=tk.NW, image=photo)  # Crée une image dans le canva aux coordonnées indiquées, en partant du coin Nord-Ouest du canva
-    monCanvas.image = photo  # Stockage de la photo dans le canva, utile pour éviter le garbage collector (pour éviter que la mémoire juge l'image inutile et la supprime)
+    monCanvas.create_image(-45, -40, anchor=tk.NW, image=photo)  # Crée une image dans le canvas aux coordonnées indiquées, en partant du coin Nord-Ouest du canva
+    monCanvas.image = photo  # Stockage de la photo dans le canvas, utile pour éviter le garbage collector (pour éviter que la mémoire juge l'image inutile et la supprime)
 
 # Fonction qui convertit une image en image compatible avec Tkinter
 def convertisseur(fig):
@@ -89,7 +91,7 @@ def convertisseur(fig):
 def creation_grille(longueur, proba): # Fonction qui gère la création de la grille de percolation
     """Crée un tableau de taille n*n simulant un milieu poreux."""
     grille = [[1.0 if random() <= proba else 0.0 for j in range(longueur)] for i in range(longueur)] # Création d'une matrice remplie de 0.0 et de 1.0 (avec une probalité d'apparaitre égale à celle rentrée précédement par l'utilisateur) disposés de manière aléatoire, par compréhension
-    return grille      # On retourne la grille
+    return grille      # On renvoie la grille
 
 # Fonction qui affiche la grille pour le bouton "Afficher grille"
 def voir_grille():
@@ -116,15 +118,15 @@ def voir_grille():
 
 # Fonction de percolation
 def percolation():
-    """ Fonction qui simule une percolation, c'est à dire le parcours de l'eau dans un millieu poreux, ici une grille. On va parcourir 
-    la première ligen de la grille, à la recherche de case blanche, soit 1.0. Si la case est blanche, on la remplacera par de l'eau.
+    """ Fonction qui simule une percolation, c'est à dire le parcours de l'eau dans un milieu poreux, ici une grille. On va parcourir 
+    la première ligne de la grille, à la recherche de case blanche, soit 1.0. Si la case est blanche, on la remplacera par de l'eau.
     Cette case prendra alors la valeur 0.5. L'échelle de couleur reconnaitra alors que le flottant 0.5 décrira l'eau"""
     L = []       # Initialisation d'une liste vide qui contiendra la liste de toute les cases blanches, et leurs voisins, où l'eau pourra percoler
     for j in range(len(grille_fin[0])):       # On parcourt la premiere ligne de la grille, pour placer l'eau sur les cases vides
         if grille_fin[0][j] == 1.0:           # Si la case est vide, (soit blanche), on va y mettre de l'eau
             L.append([0, j])
             grille_fin[0][j] = 0.5            # Il suffit alors de remplacer le flottant 1.0 par 0.5
-    while len(L) > 0:                         # On va ensuite parcourir toutes les cases 0.5, et rechercher leurs voisins qui est disponible (les cases blanche haut,bas,gauche et droite), jusqu'à ce qu'il n'y ait plus de vosins disponibles
+    while len(L) > 0:                         # On va ensuite parcourir toutes les cases 0.5, et rechercher leurs voisins qui sont disponibles (les cases blanche haut,bas,gauche et droite), jusqu'à ce qu'il n'y ait plus de vosins disponibles
         h, l = L.pop() 
         if h < len(grille_fin)-1 and grille_fin[h+1][l] == 1.0:   # Recherche du voisin du dessus
             L.append([h+1, l])    # Si une case blanche est trouvée, elle est ajouté à la liste L
@@ -139,8 +141,8 @@ def percolation():
             L.append([h, l+1])    # Si une case blanche est trouvée, elle est ajouté à la liste L
             grille_fin[h][l+1] = 0.5    # Modification de la case blanche de la matrice initiale en futur case bleue
         afficher_image(grille_fin)      # Préparation de l'affichage de la nouvelle grille percolée 0 à 4 carreaux en plus, sur le canva Tkinter
-        window.update_idletasks()  # Mettre à jour l'affichage de la percolation sur le canva
-    if 0.5 in grille_fin[int(n.get())-1]:      # On ca regarder si la percolation jusqu'en bas à eu lieu, pour prévenir l'utilisateur
+        window.update_idletasks()  # Mettre à jour l'affichage de la percolation sur le canvas
+    if 0.5 in grille_fin[int(n.get())-1]:      # On va regarder si la percolation jusqu'en bas à eu lieu, pour prévenir l'utilisateur
         texte_perco = tk.Label(window, width=20, bg='#96E7FF', text='La percolation a réussie !', font='Georgia 18', fg='#fefefe')    # On crée une petit titre qui prévient l'utilisateur que la percolation a réussi
         texte_perco.place(x=782, y=150)          # On place le texte en haut a gauche
     else:         # La percolation n'a pas eu lieu entièrement
@@ -177,4 +179,4 @@ temps.place(x=470, y=635)                   # Placement de l'entrée sur la fen�
 
 
 # Lancement de la fenêtre
-window.mainloop()            # Démarre la boucle d'événement. Autrement dit, démarre la fenêtre
+window.mainloop()            # Démarre le gestionnaire d'évènements
